@@ -1,0 +1,186 @@
+/* =============================================
+   Navbar — matches page theme colors
+   ============================================= */
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* --- Dark theme navbar colors --- */
+.navbar--dark {
+    background-color: #080e1b;
+    border-bottom: 1px solid #1e293b;
+}
+
+/* --- Light theme navbar colors --- */
+.navbar--light {
+    background-color: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* ---------- Logo ---------- */
+.navbar-logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.navbar-logo-img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+}
+
+/* ---------- Center Nav ---------- */
+.navbar-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-link {
+    display: block;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 6px;
+    position: relative;
+    transition: color 0.2s ease, background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+/* Dark link colors */
+.navbar--dark .nav-link {
+    color: #94a3b8;
+}
+
+.navbar--dark .nav-link:hover {
+    color: #f1f5f9;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.navbar--dark .nav-link--active {
+    color: #f1f5f9;
+    font-weight: 600;
+}
+
+/* Light link colors */
+.navbar--light .nav-link {
+    color: #475569;
+}
+
+.navbar--light .nav-link:hover {
+    color: #0f172a;
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.navbar--light .nav-link--active {
+    color: #0f172a;
+    font-weight: 600;
+}
+
+/* Active underline */
+.nav-link--active::after {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 14px;
+    right: 14px;
+    height: 2px;
+    background-color: #3b82f6;
+    border-radius: 2px;
+}
+
+/* ---------- Right Icons ---------- */
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.navbar-icon-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.navbar--dark .navbar-icon-btn {
+    color: #94a3b8;
+}
+
+.navbar--dark .navbar-icon-btn:hover {
+    color: #f1f5f9;
+    background-color: rgba(255, 255, 255, 0.07);
+}
+
+.navbar--light .navbar-icon-btn {
+    color: #475569;
+}
+
+.navbar--light .navbar-icon-btn:hover {
+    color: #0f172a;
+    background-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Notification dot */
+.navbar-notif-dot {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 7px;
+    height: 7px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    border: 2px solid transparent;
+}
+
+.navbar--dark .navbar-notif-dot {
+    border-color: #0f172a;
+}
+
+.navbar--light .navbar-notif-dot {
+    border-color: #f1f5f9;
+}
+
+/* Account button pill style */
+.navbar-account-btn {
+    border-radius: 50%;
+    border: 2px solid transparent !important;
+    transition: border-color 0.2s ease, background-color 0.2s ease !important;
+}
+
+.navbar--dark .navbar-account-btn:hover {
+    border-color: #3b82f6 !important;
+}
+
+.navbar--light .navbar-account-btn:hover {
+    border-color: #2563eb !important;
+}

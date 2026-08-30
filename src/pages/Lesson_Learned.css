@@ -1,0 +1,399 @@
+/* =========================================================
+   Lesson Learned Page — Styles & Theme
+   ========================================================= */
+
+/* ---------- Theme Variables (Light) ---------- */
+.lesson-page-container {
+    --bg-page: #f1f5f9;
+    --bg-box: #ffffff;
+    --bg-card: #ffffff;
+    --bg-input: #f8fafc;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --border-color: #cbd5e1;
+    --accent-color: #2563eb;
+    --accent-hover: #1d4ed8;
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.07), 0 1px 2px -1px rgba(0, 0, 0, 0.07);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    --star-color: #f59e0b;
+
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 32px 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Centered content wrapper — 1/6 margin each side, content fills middle 2/3 */
+.lesson-page-inner {
+    margin-left: 16.666%;
+    margin-right: 16.666%;
+    min-height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* ---------- Breadcrumb ---------- */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.breadcrumb-home-btn {
+    background: transparent;
+    color: var(--text-secondary);
+    border: none;
+    padding: 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb-home-btn:hover {
+    color: var(--accent-color);
+}
+
+.breadcrumb-separator {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    opacity: 0.5;
+}
+
+.breadcrumb-current {
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+/* ---------- Theme Variables (Dark) ---------- */
+.lesson-page-container.dark-mode {
+    --bg-page: #080e1b;
+    --bg-box: black;
+    --bg-card: black;
+    --bg-input: black;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+    --border-color: #334155;
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4), 0 1px 2px -1px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+}
+
+/* Make sure all text inside inherits the theme color */
+.lesson-page-container * {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* ---------- Header Section ---------- */
+.lesson-page-header {
+    margin-bottom: 28px;
+}
+
+.header-sub-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.page-description {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    flex: 1;
+}
+
+.create-lesson-btn {
+    margin-left: auto;
+    flex-shrink: 0;
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 22px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.create-lesson-btn:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* ---------- Search Bar Box ---------- */
+.search-bar-box {
+    background-color: var(--bg-box);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-md);
+}
+
+.search-bar-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.search-input,
+.search-select {
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-family: inherit;
+    outline: none;
+    height: 42px;
+    box-sizing: border-box;
+}
+
+.search-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.search-select {
+    flex: 1;
+    min-width: 140px;
+}
+
+.search-select option {
+    background-color: var(--bg-box);
+    color: var(--text-primary);
+}
+
+.search-input {
+    flex: 2;
+    min-width: 180px;
+}
+
+.search-input:focus,
+.search-select:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.search-btn {
+    flex-shrink: 0;
+    padding: 10px 30px;
+    height: 42px;
+    box-sizing: border-box;
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.search-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+/* ---------- Group Toggle ---------- */
+.group-toggle-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.group-toggle-btn {
+    margin-bottom: 20px;
+    background-color: var(--bg-box);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: border-color 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.group-toggle-btn:hover {
+    border-color: var(--accent-color);
+}
+
+/* ---------- Content Area ---------- */
+.lessons-content-area {
+    margin-top: 8px;
+    flex: 1;
+}
+
+.department-section {
+    margin-bottom: 36px;
+}
+
+.department-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin: 0 0 16px 0;
+    color: var(--text-primary);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+/* ---------- Lesson Card ---------- */
+.lesson-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    width: 80%;
+    height: 100%;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.lesson-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.lesson-card-img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.lesson-card-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin: 0 0 6px 0;
+    color: var(--text-primary);
+}
+
+.lesson-card-poster {
+    font-size: 0.875rem;
+    margin: 0 0 8px 0;
+    color: var(--text-secondary);
+}
+
+.lesson-card-rating {
+    font-size: 0.9rem;
+    margin: 0 0 14px 0;
+    color: var(--star-color);
+}
+
+.lesson-card-rating-count {
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+}
+
+.lesson-card-btn {
+    margin-top: auto;
+    width: 100%;
+    padding: 9px 14px;
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.lesson-card-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+/* ---------- Empty State ---------- */
+.no-lessons-msg {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-style: italic;
+    margin-top: 16px;
+}
+
+.pagination-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+}
+
+.pagination-arrow,
+.pagination-number {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+.pagination-arrow:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.pagination-number.active {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+.pagination-arrow:hover:not(:disabled),
+.pagination-number:hover {
+    color: var(--accent-color);
+}
+
+.lesson-card-poster-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 8px 0;
+}
+
+.lesson-card-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
