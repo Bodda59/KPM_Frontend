@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
 import "./Chatbot.css";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const INITIAL_MESSAGES = [
     {
@@ -74,35 +76,74 @@ function Chatbot() {
         setActiveChatId(newChatId);
     };
 
-    const handleSend = () => {
+    const handleSend = async () => {
         const trimmed = input.trim();
         if (!trimmed) return;
 
         const userMsg = { id: Date.now(), role: "user", text: trimmed };
-        const botMsg = {
-            id: Date.now() + 1,
-            role: "assistant",
-            text: "🔧 Backend not connected yet. Your message has been received and will be processed once the AI service is integrated.",
-        };
 
-        setChats((prevChats) => {
-            return prevChats.map((c) => {
+        // Show the user's message immediately
+        setChats((prevChats) =>
+            prevChats.map((c) => {
                 if (c.id === activeChat.id) {
-                    // Update chat title based on the first user query if it's default title
                     let newTitle = c.title;
                     if (c.messages.length === 1 && c.title.startsWith("Chat ")) {
                         newTitle = trimmed.slice(0, 30) + (trimmed.length > 30 ? "..." : "");
                     }
-                    return {
-                        ...c,
-                        title: newTitle,
-                        messages: [...c.messages, userMsg, botMsg]
-                    };
+                    return { ...c, title: newTitle, messages: [...c.messages, userMsg] };
                 }
                 return c;
-            });
-        });
+            })
+        );
         setInput("");
+
+        // Show a temporary "thinking" bubble
+        const loadingId = Date.now() + 1;
+        const loadingMsg = { id: loadingId, role: "assistant", text: "…", loading: true };
+        setChats((prevChats) =>
+            prevChats.map((c) =>
+                c.id === activeChat.id ? { ...c, messages: [...c.messages, loadingMsg] } : c
+            )
+        );
+
+        try {
+            const response = await fetch("http://localhost:8000/chat", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message: trimmed }),
+            });
+
+            if (!response.ok) throw new Error(`Server error: ${response.status}`);
+
+            const data = await response.json();
+
+            // Replace the loading bubble with the real reply
+            setChats((prevChats) =>
+                prevChats.map((c) => {
+                    if (c.id !== activeChat.id) return c;
+                    return {
+                        ...c,
+                        messages: c.messages.map((m) =>
+                            m.id === loadingId ? { ...m, text: data.reply, loading: false } : m
+                        ),
+                    };
+                })
+            );
+        } catch (err) {
+            setChats((prevChats) =>
+                prevChats.map((c) => {
+                    if (c.id !== activeChat.id) return c;
+                    return {
+                        ...c,
+                        messages: c.messages.map((m) =>
+                            m.id === loadingId
+                                ? { ...m, text: "⚠️ Couldn't reach the AI service. Please try again.", loading: false }
+                                : m
+                        ),
+                    };
+                })
+            );
+        }
     };
 
     const handleDeleteChat = (idToDelete, e) => {
@@ -192,8 +233,14 @@ function Chatbot() {
                                 <div
                                     className={`chatbot-bubble ${msg.role === "user" ? "chatbot-bubble--user" : "chatbot-bubble--bot"}`}
                                 >
-                                    {msg.text}
-                                </div>
+                                    {msg.role === "assistant" ? (
+                                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                            {msg.text}
+                                        </ReactMarkdown>
+                                    ) : (
+                                        msg.text
+                                    )}
+                            </div>
                             </div>
                         ))}
                         <div ref={bottomRef} />
